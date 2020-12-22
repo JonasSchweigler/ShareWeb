@@ -100,7 +100,7 @@ class _RecentOrdersState extends State<RecentOrders> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
             'Speziall Angebote',
             style: TextStyle(
@@ -111,7 +111,7 @@ class _RecentOrdersState extends State<RecentOrders> {
           ),
         ),
         Container(
-          height: 500,
+          height: 495,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.only(left: 10.0),

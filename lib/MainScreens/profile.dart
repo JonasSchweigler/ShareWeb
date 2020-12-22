@@ -17,16 +17,12 @@ class _ProfilePageState extends State<ProfilePage> {
       key: _scaffoldKey,
       appBar: PreferredSize(
           child: AppBar(
+            flexibleSpace: Image(
+              image: AssetImage('assets/images/Sweep.png'),
+              fit: BoxFit.cover,
+            ),
             centerTitle: true,
             backgroundColor: Colors.black12,
-            title: Text(
-              "Profile",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15),
-            ),
             leading: GestureDetector(
               onTap: () {
                 Navigator.push(context,

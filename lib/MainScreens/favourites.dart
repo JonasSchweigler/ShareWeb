@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shareweb/utilities/data/data.dart';
+import 'package:shareweb/screens/cart_screen.dart';
 
 class FavouritePage extends StatefulWidget {
   @override
@@ -6,27 +8,56 @@ class FavouritePage extends StatefulWidget {
 }
 
 class _FavouritePageState extends State<FavouritePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: PreferredSize(
-          child: AppBar(
-            flexibleSpace: Image(
-              image: AssetImage('assets/images/steak.jpg'),
-              fit: BoxFit.cover,
+        child: AppBar(
+          flexibleSpace: Image(
+            image: AssetImage('assets/images/Sweep.png'),
+            fit: BoxFit.cover,
+          ),
+          backgroundColor: Colors.teal,
+          leading: IconButton(
+            icon: Icon(Icons.more_horiz_rounded),
+            iconSize: 40.0,
+            onPressed: () {
+              _scaffoldKey.currentState.openDrawer();
+            },
+          ),
+        ),
+        preferredSize: Size.fromHeight(80),
+      ),
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 5,
+              top: 8,
+              bottom: 8,
+              right: 100,
             ),
-            centerTitle: true,
-            backgroundColor: Colors.black12,
-            title: Text(
-              "Favourites",
-              style: TextStyle(
+            child: FlatButton(
+              child: Text(
+                'Bestellungen (${currentUser.cart.length})',
+                style: TextStyle(
                   color: Colors.black,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 10),
+                  fontSize: 20,
+                ),
+              ),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CartScreen(),
+                ),
+              ),
             ),
           ),
-          preferredSize: Size.fromHeight(80)),
+        ],
+      )),
       body: Container(
         child: Column(
           children: <Widget>[],

@@ -4,7 +4,6 @@ import 'package:shareweb/utilities/models/restaurant.dart';
 import 'package:shareweb/screens/cart_screen.dart';
 import 'package:shareweb/screens/restaurant_screen.dart';
 import 'package:shareweb/widgets/rating_stars.dart';
-import 'package:shareweb/widgets/recent_orders.dart';
 
 Gastronomie restaurant = Gastronomie();
 
@@ -14,10 +13,6 @@ class HomePagePage extends StatefulWidget {
 }
 
 class _HomePagePageState extends State<HomePagePage> {
-  IconData getIcon() {
-    return Icons.home;
-  }
-
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   _buildRestaurants() {
     List<Widget> restaurantList = [];
@@ -108,25 +103,36 @@ class _HomePagePageState extends State<HomePagePage> {
       appBar: PreferredSize(
         child: AppBar(
           flexibleSpace: Image(
-            image: AssetImage('assets/images/burger.jpg'),
+            image: AssetImage('assets/images/Sweep.png'),
             fit: BoxFit.cover,
           ),
           backgroundColor: Colors.teal,
           leading: IconButton(
             icon: Icon(Icons.more_horiz_rounded),
-            iconSize: 30.0,
+            iconSize: 40.0,
             onPressed: () {
               _scaffoldKey.currentState.openDrawer();
             },
           ),
-          title: Text('Sweep'),
-          actions: <Widget>[
-            FlatButton(
+        ),
+        preferredSize: Size.fromHeight(80),
+      ),
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 5,
+              top: 8,
+              bottom: 8,
+              right: 100,
+            ),
+            child: FlatButton(
               child: Text(
                 'Bestellungen (${currentUser.cart.length})',
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
+                  color: Colors.black,
+                  fontSize: 20,
                 ),
               ),
               onPressed: () => Navigator.push(
@@ -136,16 +142,6 @@ class _HomePagePageState extends State<HomePagePage> {
                 ),
               ),
             ),
-          ],
-        ),
-        preferredSize: Size.fromHeight(80),
-      ),
-      drawer: Drawer(
-          child: ListView(
-        children: [
-          FlatButton(
-            child: Text('Allgemein'),
-            onPressed: () {},
           ),
         ],
       )),

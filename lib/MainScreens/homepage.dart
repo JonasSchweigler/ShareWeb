@@ -151,12 +151,11 @@ class _HomePagePageState extends State<HomePagePage> {
       )),
       body: ListView(
         children: <Widget>[
-          RecentOrders(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 child: Text(
                   'In deiner Nähe',
                   style: TextStyle(

@@ -100,7 +100,7 @@ class _RecentOrdersState extends State<RecentOrders> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
           child: Text(
             'Speziall Angebote',
             style: TextStyle(
@@ -111,11 +111,11 @@ class _RecentOrdersState extends State<RecentOrders> {
           ),
         ),
         Container(
-          height: 120.0,
+          height: 500,
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             padding: EdgeInsets.only(left: 10.0),
-            scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.vertical,
             itemCount: currentUser.orders.length,
             itemBuilder: (BuildContext context, int index) {
               Order order = currentUser.orders[index];

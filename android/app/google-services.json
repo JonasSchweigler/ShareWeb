@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1087760278145",
+    "firebase_url": "https://app-server-a2202.firebaseio.com",
+    "project_id": "app-server-a2202",
+    "storage_bucket": "app-server-a2202.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087760278145:android:f37ea6869c68ea1fc2a380",
+        "android_client_info": {
+          "package_name": "com.example.shareweb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087760278145-8rhfv7rbfh2ed1asgdsmg6rrm9nmosu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCzUwTQoUw-Nx9QOrFN7oX74Y3P9RwGgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087760278145-8rhfv7rbfh2ed1asgdsmg6rrm9nmosu6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1087760278145-27g70bfeegumontlqbebv1rs3kunla7d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.appShareweb"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

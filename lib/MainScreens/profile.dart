@@ -11,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             ],
           ),
-          preferredSize: Size.fromHeight(80)),
+          preferredSize: Size.fromHeight(65)),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       endDrawer: Drawer(
           child: ListView(

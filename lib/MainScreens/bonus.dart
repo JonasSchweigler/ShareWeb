@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shareweb/widgets/recent_orders.dart';
 import 'package:shareweb/utilities/data/data.dart';
-import 'package:shareweb/screens/cart_screen.dart';
+import 'package:shareweb/views/cart_screen.dart';
 
 class BonusPage extends StatefulWidget {
   @override
@@ -10,6 +10,7 @@ class BonusPage extends StatefulWidget {
 
 class _BonusPageState extends State<BonusPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +30,7 @@ class _BonusPageState extends State<BonusPage> {
             },
           ),
         ),
-        preferredSize: Size.fromHeight(80),
+        preferredSize: Size.fromHeight(65),
       ),
       drawer: Drawer(
           child: ListView(

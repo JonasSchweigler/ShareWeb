@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     FavouritePage(),
     ProfilePage(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

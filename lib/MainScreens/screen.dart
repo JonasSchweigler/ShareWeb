@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shareweb/utilities/data/data.dart';
-import 'package:shareweb/screens/cart_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -8,57 +7,25 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: PreferredSize(
-        child: AppBar(
-          flexibleSpace: Image(
-            image: AssetImage('assets/images/Sweep.png'),
-            fit: BoxFit.cover,
-          ),
-          backgroundColor: Colors.teal,
-          leading: IconButton(
-            icon: Icon(Icons.more_horiz_rounded),
-            iconSize: 40.0,
-            onPressed: () {
-              _scaffoldKey.currentState.openDrawer();
-            },
-          ),
-        ),
-        preferredSize: Size.fromHeight(80),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 5,
-                top: 8,
-                bottom: 8,
-                right: 100,
-              ),
-              child: FlatButton(
-                child: Text(
-                  'Bestellungen (${currentUser.cart.length})',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                  ),
-                ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CartScreen(),
-                  ),
+          child: AppBar(
+            centerTitle: true,
+            backgroundColor: Colors.teal,
+            title: Text(
+              'Search',
+              style: GoogleFonts.shadowsIntoLight(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
                 ),
               ),
             ),
-          ],
-        ),
-      ),
+          ),
+          preferredSize: Size.fromHeight(65)),
       body: Container(
         child: Padding(
           padding: EdgeInsets.all(20.0),
@@ -78,7 +45,7 @@ class _SearchPageState extends State<SearchPage> {
                   color: Theme.of(context).primaryColor,
                 ),
               ),
-              hintText: 'Anbieter oder Standort eingeben',
+              hintText: 'Anbieter suchen',
               prefixIcon: Icon(
                 Icons.search,
                 size: 30.0,

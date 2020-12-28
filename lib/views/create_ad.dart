@@ -18,7 +18,7 @@ class _CreateAdState extends State<CreateAd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40.0),
+        preferredSize: Size.fromHeight(55.0),
         child: AppBar(
           centerTitle: true,
           backgroundColor: Colors.black12,
@@ -62,10 +62,18 @@ class _CreateAdState extends State<CreateAd> {
                         ),
                       ),
                     ),
-              FlatButton(
-                child: Text('upload Image'),
+              Card(
                 color: Colors.green,
-                onPressed: () => dataBase.uploadImage(),
+                elevation: 6.0,
+                child: FlatButton(
+                  child: Text(
+                    'Upload Image',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                    ),
+                  ),
+                  onPressed: () => dataBase.uploadImage(),
+                ),
               ),
               Container(
                 margin: EdgeInsets.only(
@@ -107,33 +115,42 @@ class _CreateAdState extends State<CreateAd> {
                       ),
                     ),
                     Padding(
-                      child: FlatButton(
-                        child: Text('new'),
+                      child: Card(
                         color: Colors.red,
-                        onPressed: () async {
-                          // dataBaseService.newAd(
-                          //   'adress',
-                          //   'providerType',
-                          //   'imageURL',
-                          //   'providerName',
-                          //   null,
-                          // );
-                          try {
-                            await dataBase.addProvider(
-                              adress: _adressController.text,
-                              name: _nameController.text,
-                              provider: _providerController.text,
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => HomePage(),
-                              ),
-                            );
-                          } catch (e) {
-                            print(e);
-                          }
-                        },
+                        elevation: 6,
+                        child: FlatButton(
+                          minWidth: 99,
+                          child: Text(
+                            'New',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                          onPressed: () async {
+                            // dataBaseService.newAd(
+                            //   'adress',
+                            //   'providerType',
+                            //   'imageURL',
+                            //   'providerName',
+                            //   null,
+                            // );
+                            try {
+                              await dataBase.addProvider(
+                                adress: _adressController.text,
+                                name: _nameController.text,
+                                provider: _providerController.text,
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => HomePage(),
+                                ),
+                              );
+                            } catch (e) {
+                              print(e);
+                            }
+                          },
+                        ),
                       ),
                       padding: EdgeInsets.all(8),
                     )

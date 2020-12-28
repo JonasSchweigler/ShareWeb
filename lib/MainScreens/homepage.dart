@@ -73,17 +73,7 @@ class _HomePagePageState extends State<HomePagePage> {
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
-              child:
-                  // Hero(
-                  // tag: imageURL,
-                  // child: AssetImage(
-                  //   imageURL,
-                  //   height: 150.0,
-                  //   width: 150.0,
-                  // ),
-                  //   fit: BoxFit.cover,
-                  // ),
-                  Hero(
+              child: Hero(
                 tag: imageURL,
                 child: Image(
                   height: 150.0,
@@ -143,10 +133,11 @@ class _HomePagePageState extends State<HomePagePage> {
       itemCount: snapshot.docs.length,
       itemBuilder: (context, index) {
         final doc = snapshot.docs[index];
-        return ListTile(
-          title: Text(
-            doc["adress"],
-          ),
+        return _buildRestaurants(
+          adress: doc["adress"],
+          imageURL: doc["imageURL"],
+          providerName: doc["providerName"],
+          providerType: doc["providerType"],
         );
       },
     );

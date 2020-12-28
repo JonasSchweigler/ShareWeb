@@ -113,7 +113,6 @@ class _RecentOrdersState extends State<RecentOrders> {
         Container(
           height: 495,
           child: ListView.builder(
-            physics: BouncingScrollPhysics(),
             padding: EdgeInsets.only(left: 10.0),
             scrollDirection: Axis.vertical,
             itemCount: currentUser.orders.length,

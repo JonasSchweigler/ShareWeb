@@ -1,17 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shareweb/utilities/data/data.dart';
 import 'package:shareweb/utilities/models/restaurant.dart';
 import 'package:shareweb/views/cart_screen.dart';
 import 'package:shareweb/views/restaurant_screen.dart';
-import 'package:shareweb/views/create_ad.dart';
-import 'package:shareweb/widgets/rating_stars.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shareweb/utilities/services/location.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:shareweb/views/create_ad.dart';
-import 'package:shareweb/utilities/data/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 Gastronomie restaurant = Gastronomie();
 Adress _adress = Adress();
@@ -23,7 +20,6 @@ class HomePagePage extends StatefulWidget {
 
 class _HomePagePageState extends State<HomePagePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  var _firebaseRef;
 
   double longitude;
   double latitude;
@@ -46,7 +42,6 @@ class _HomePagePageState extends State<HomePagePage> {
     } catch (e) {
       print(e);
     }
-    _firebaseRef = FirebaseDatabase().reference().child('Provider');
   }
 
   _buildRestaurants({
@@ -59,7 +54,9 @@ class _HomePagePageState extends State<HomePagePage> {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => RestaurantScreen(restaurant: restaurant),
+          builder: (_) => RestaurantScreen(
+              // restaurant: restaurant,
+              ),
         ),
       ),
       child: Container(
@@ -76,25 +73,25 @@ class _HomePagePageState extends State<HomePagePage> {
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
-              child: (dataBase.imageUrl != null)
-                  ? Hero(
-                      tag: imageURL,
-                      child: Image(
-                        height: 150.0,
-                        width: 150.0,
-                        image: NetworkImage(imageURL),
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : Hero(
-                      tag: 'assets/images/Sweep.png',
-                      child: Image(
-                        height: 150.0,
-                        width: 150.0,
-                        image: AssetImage('assets/images/Sweep.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+              child:
+                  // Hero(
+                  // tag: imageURL,
+                  // child: AssetImage(
+                  //   imageURL,
+                  //   height: 150.0,
+                  //   width: 150.0,
+                  // ),
+                  //   fit: BoxFit.cover,
+                  // ),
+                  Hero(
+                tag: imageURL,
+                child: Image(
+                  height: 150.0,
+                  width: 150.0,
+                  image: AssetImage(imageURL),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             Expanded(
               child: Container(
@@ -186,18 +183,20 @@ class _HomePagePageState extends State<HomePagePage> {
               ),
               child: FlatButton(
                 child: Text(
-                  'Bestellungen (${currentUser.cart.length})',
+                  'Orders (${currentUser.cart.length})',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
                   ),
                 ),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => CartScreen(),
-                  ),
-                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => CartScreen(),
+                    ),
+                  );
+                },
               ),
             ),
             Padding(
@@ -229,52 +228,25 @@ class _HomePagePageState extends State<HomePagePage> {
         ),
       ),
       body: StreamBuilder(
-        stream: _firebaseRef.onValue,
-        builder: (context, snap) {
-          if (snap.hasData &&
-              !snap.hasError &&
-              snap.data.snapshot.value != null) {
-            Map providerdata = snap.data.snapshot.value;
-            List item = [];
-
-            providerdata.forEach(
-                (index, data) => item.add({"Licence": index, ...data}));
-
-            return
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                //     Padding(
-                //       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                //       child: Text(
-                //         'In deiner Nähe',
-                //         style: TextStyle(
-                //           fontSize: 24.0,
-                //           fontWeight: FontWeight.w600,
-                //           letterSpacing: 1.2,
-                //         ),
-                //       ),
-                //     ),
-                ListView.builder(
-              itemCount: item.length,
-              itemBuilder: (context, index) {
-                return _buildRestaurants(
-                  adress: item[index]['adress'],
-                  imageURL: item[index]['imageURL'],
-                  providerName: item[index]['providerName'],
-                  providerType: item[index]['providerType'],
-                );
-              },
-            );
-            //   ],
-            // );
-          } else
+        stream: FirebaseFirestore.instance.collection("Providers").snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.waiting) {
+            return ListView.builder(
+                itemCount: snapshot.data.doc.lenght,
+                itemBuilder: (context, index) {
+                  DocumentSnapshot providers = snapshot.data.doc[index];
+                  return ListTile(
+                    title: Text(providers['adress']),
+                  );
+                });
+          } else {
             return Center(
               child: SpinKitDualRing(
                 color: Colors.white,
                 size: 100.0,
               ),
             );
+          }
         },
       ),
     );

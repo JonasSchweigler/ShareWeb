@@ -19,7 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: PreferredSize(
           child: AppBar(
             flexibleSpace: Image(
-              image: AssetImage('assets/images/Sweep.png'),
+              image: AssetImage('assets/images/Profile_Sweep.png'),
               fit: BoxFit.cover,
             ),
             centerTitle: true,

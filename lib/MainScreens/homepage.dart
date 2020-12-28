@@ -55,8 +55,8 @@ class _HomePagePageState extends State<HomePagePage> {
         context,
         MaterialPageRoute(
           builder: (_) => RestaurantScreen(
-              // restaurant: restaurant,
-              ),
+            restaurant: restaurant,
+          ),
         ),
       ),
       child: Container(
@@ -135,6 +135,20 @@ class _HomePagePageState extends State<HomePagePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildList(QuerySnapshot snapshot) {
+    return ListView.builder(
+      itemCount: snapshot.docs.length,
+      itemBuilder: (context, index) {
+        final doc = snapshot.docs[index];
+        return ListTile(
+          title: Text(
+            doc["adress"],
+          ),
+        );
+      },
     );
   }
 
@@ -227,18 +241,13 @@ class _HomePagePageState extends State<HomePagePage> {
           ],
         ),
       ),
-      body: StreamBuilder(
+      body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection("Providers").snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.waiting) {
-            return ListView.builder(
-                itemCount: snapshot.data.doc.lenght,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot providers = snapshot.data.doc[index];
-                  return ListTile(
-                    title: Text(providers['adress']),
-                  );
-                });
+          if (snapshot.hasData &&
+              !snapshot.hasError &&
+              snapshot.connectionState != ConnectionState.waiting) {
+            return _buildList(snapshot.data);
           } else {
             return Center(
               child: SpinKitDualRing(

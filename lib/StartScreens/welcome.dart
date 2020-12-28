@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shareweb/StartScreens/login.dart';
 import 'package:shareweb/StartScreens/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key key, this.title}) : super(key: key);
@@ -13,7 +14,7 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  Widget _submitButton() {
+  Widget _loginButton() {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -125,16 +126,35 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Widget _underTitle() {
-    return Text(
-      'Enjoy cheep with Swepp',
-      style: GoogleFonts.portLligatSans(
-        textStyle: Theme.of(context).textTheme.display1,
-        fontSize: 30,
-        fontWeight: FontWeight.w700,
-        color: Colors.white,
-      ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(width: 20.0, height: 100.0),
+        Text(
+          "Get",
+          style: TextStyle(fontSize: 30.0),
+        ),
+        SizedBox(width: 20.0, height: 100.0),
+        RotateAnimatedTextKit(
+            text: ["Happy", "Relaxed", "Cheep", "Just Sweep"],
+            textStyle: TextStyle(fontSize: 30.0, fontFamily: "Horizon"),
+            textAlign: TextAlign.start),
+      ],
     );
   }
+
+  // Widget _underTitle() {
+  //   return Text(
+  //     'Enjoy cheep with Swepp',
+  //     style: GoogleFonts.portLligatSans(
+  //       textStyle: Theme.of(context).textTheme.display1,
+  //       fontSize: 30,
+  //       fontWeight: FontWeight.w700,
+  //       color: Colors.white,
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -168,11 +188,11 @@ class _WelcomePageState extends State<WelcomePage> {
               SizedBox(
                 height: 25,
               ),
-              _underTitle(),
+              Center(child: _underTitle()),
               SizedBox(
                 height: 200,
               ),
-              _submitButton(),
+              _loginButton(),
               SizedBox(
                 height: 20,
               ),
